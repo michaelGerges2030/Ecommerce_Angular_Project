@@ -12,6 +12,7 @@ export class CartService {
   cartCount: BehaviorSubject<number> = new BehaviorSubject(0)
 
   constructor(private _http: HttpClient) { 
+    console.log(localStorage.getItem("token"));
     if (localStorage.getItem("token")){
       this.getAllProduct().subscribe({
         next:(response)=>{
@@ -25,6 +26,7 @@ export class CartService {
     token: localStorage.getItem("token")
   }
 
+  
   addProductToCart(id: string): Observable<any>{
     let body={productId: id}
     return this._http.post(`${this.baseUrl}/api/v1/cart`, body,
